@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { signup } from '../../utils/api';
 import { useRouter } from 'next/router';
+import { setToken } from '../../utils/auth';
+
 import {
   Box,
   Button,
@@ -25,8 +27,18 @@ export default function SignupForm() {
   const onSubmit = async (data) => {
     setErrorMsg('');
     try {
-      await signup(data);
-      router.push('/auth/login');
+      const response = await signup(data);
+      // Check the role from the response
+      console.log(response?.data?.data);
+      const role = response?.data?.data?.user?.role;
+      const token = response?.data?.data?.access_token;
+      setToken(token);
+      localStorage.setItem('role', role);
+      if (role === 'admin') {
+        router.push('/dashboard/admin');
+      } else {
+        router.push('/dashboard/user');
+      }
     } catch (err) {
       setErrorMsg(err?.response?.data?.message || 'Signup failed');
     }
@@ -86,18 +98,32 @@ export default function SignupForm() {
             />
             <TextField
               label="Phone Number"
+              type="tel"
               fullWidth
               margin="normal"
-              {...register('phone', { required: 'Phone Number is required' })}
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 10 }}
+              {...register('phone', {
+                required: 'Phone Number is required',
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: 'Phone Number must be exactly 10 digits',
+                },
+              })}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
             />
             <TextField
               label="Email"
               type="email"
               fullWidth
               margin="normal"
-              {...register('email', { required: 'Email is required' })}
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'Enter a valid email address',
+                },
+              })}
               error={!!errors.email}
               helperText={errors.email?.message}
             />

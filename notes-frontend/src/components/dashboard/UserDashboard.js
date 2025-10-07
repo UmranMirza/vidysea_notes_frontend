@@ -28,7 +28,7 @@ export default function UserDashboard() {
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [noteData, setNoteData] = useState({ title: '', content: '' });
+  const [noteData, setNoteData] = useState({ title: '', description: '' });
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteNoteId, setDeleteNoteId] = useState(null);

@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../../utils/api';
 import { setToken } from '../../utils/auth';
-import { useRouter } from 'next/navigation'; // <-- FIXED HERE
+import { useRouter } from 'next/navigation'; 
 import {
   Box,
   Button,
@@ -83,7 +83,13 @@ export default function LoginForm() {
               type="email"
               fullWidth
               margin="normal"
-              {...register('email', { required: 'Email is required' })}
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'Enter a valid email address',
+                },
+              })}
               error={!!errors.email}
               helperText={errors.email?.message}
             />

@@ -28,7 +28,7 @@ export default function AdminDashboard() {
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [noteData, setNoteData] = useState({ title: '', content: '' });
+  const [noteData, setNoteData] = useState({ title: '', description: '' });
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteNoteId, setDeleteNoteId] = useState(null);
@@ -58,7 +58,7 @@ export default function AdminDashboard() {
   const handleOpen = (note = null) => {
     if (note) {
       setEditMode(true);
-      setNoteData({ title: note.title, description: note.content });
+      setNoteData({ title: note.title, description: note.description });
       setSelectedNoteId(note.id);
     } else {
       setEditMode(false);
