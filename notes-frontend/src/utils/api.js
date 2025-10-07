@@ -18,7 +18,10 @@ export const login = (data) => api.post('/app/auth/login', data);
 export const signup = (data) => api.post('/app/auth/register', data);
 export const getNotes = (params) => api.get('/app/notes/', { params });
 export const createNote = (data) => api.post('/app/notes/create', data);
+export const createNoteAdmin = (data) => api.post('/app/notes/admin/create', data);
+export const editNoteAdmin = (id, data) => api.put(`/app/notes/admin/edit/${id}`, data);
 export const editNote = (id, data) => api.put(`/app/notes/edit/${id}`, data);
 export const deleteNote = (id) => api.delete(`/app/notes/delete/${id}`);
+export const deleteNoteAdmin = (id) => api.delete(`/app/notes/admin/delete/${id}`);
 export const getAllNotes = (params) => api.get('/app/notes/all', { params });
 // ...admin APIs
