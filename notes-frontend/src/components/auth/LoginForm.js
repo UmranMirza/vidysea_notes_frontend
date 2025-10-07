@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../../utils/api';
 import { setToken } from '../../utils/auth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'; // <-- FIXED HERE
 import {
   Box,
   Button,
