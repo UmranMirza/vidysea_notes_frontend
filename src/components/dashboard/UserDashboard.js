@@ -172,7 +172,7 @@ export default function UserDashboard() {
           label="Search Notes by Title"
           fullWidth
           value={q}
-          onKeyDown={e => setQ(e.target.value)}
+          onChange={e => setQ(e.target.value)}
           variant="outlined"
           sx={{
             flex: 1,
